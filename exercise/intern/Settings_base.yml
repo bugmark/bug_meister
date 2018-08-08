@@ -18,6 +18,5 @@ repo_list:
   - casmacc/slackin
   - casmacc/phoenix_helloworld
   - casmacc/sinatra_helloworld
-  - casmacc/stan
   - casmacc/mail_proxy
 
