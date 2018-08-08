@@ -1,10 +1,23 @@
 ---
 tracker_type: github
 repo_list:
-  - bugmark/exchange
+  - Bugmark-Simulator/bugmark_simulation
   - bugmark/test_bench
   - bugmark/website
+  - bugmark/exchange
   - bugmark/outreachy
+  - bugmark/awesome-bugmark 
   - bugmark/iora
   - bugmark/paypro
-  - Bugmark-Simulator/bugmark_simulation
+  - bugmark/bmx_cl_ruby
+  - bugmark/bmx_bots
+  - casmacc/nginx_proxy
+  - casmacc/website
+  - casmacc/lead_capture
+  - casmacc/html_helloworld
+  - casmacc/slackin
+  - casmacc/phoenix_helloworld
+  - casmacc/sinatra_helloworld
+  - casmacc/stan
+  - casmacc/mail_proxy
+
