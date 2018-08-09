@@ -111,7 +111,7 @@ hr
             span &times;
         .modal-body
           .row
-            .col-md-6
+            .col-md-7
               p <b>Payout</b><br/>
               select.form-control#valueSel>[name='value']
                 option[value="20" selected="selected"]  20
@@ -125,7 +125,7 @@ hr
                 option[value="180"]                     180
                 option[value="200"]                     200
               ' tokens
-            .col-md-6
+            .col-md-5
               p[style='margin-bottom: 23px;'] <b>Your contribution</b><br/>
               span#contribution> TBD
               | tokens
@@ -133,13 +133,13 @@ hr
             .col-md-12
               hr
           .row
-            .col-md-6
+            .col-md-7
               p[style='margin-bottom: 20px;'] <b>Matures</b><br/>
               .btn-group.btn-group-toggle#maturation[data-toggle="buttons"]
                 - BugmTime.next_week_ends.each_with_index do |date, idx|
                   label.btn.btn-secondary.btn-sm
                     input[type="radio" value="#{dstr(date)}" name="maturation" id="mat#{idx}"] #{dvis(date)}
-            .col-md-6
+            .col-md-5
               p <b>Expires</b><br/>
               input#today[type='hidden' value='#{dstr(BugmTime.now)}']
               input#side[type='hidden' name='side' value='']
