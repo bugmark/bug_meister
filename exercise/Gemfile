@@ -7,4 +7,6 @@ github 'sinatra/sinatra' do
   gem 'sinatra-contrib'
 end
 gem 'kramdown'
+gem 'slim'
+gem 'rerun'
 

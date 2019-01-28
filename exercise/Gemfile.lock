@@ -31,6 +31,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.13.0)
       faraday (>= 0.7.4, < 1.0)
+    ffi (1.10.0)
     graphlient (0.3.3)
       faraday
       faraday_middleware
@@ -42,13 +43,27 @@ GEM
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
     kramdown (2.0.0)
+    listen (3.1.5)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
+      ruby_dep (~> 1.2)
     minitest (5.11.3)
     multi_json (1.13.1)
     multipart-post (2.0.0)
     mustermann (1.0.3)
     rack (2.0.6)
+    rb-fsevent (0.10.3)
+    rb-inotify (0.10.0)
+      ffi (~> 1.0)
+    rerun (0.13.0)
+      listen (~> 3.0)
+    ruby_dep (1.5.0)
     sinatra-flash (0.3.0)
       sinatra (>= 1.0.0)
+    slim (4.0.1)
+      temple (>= 0.7.6, < 0.9)
+      tilt (>= 2.0.6, < 2.1)
+    temple (0.8.0)
     thread_safe (0.3.6)
     tilt (2.0.9)
     tzinfo (1.2.5)
@@ -60,9 +75,11 @@ PLATFORMS
 DEPENDENCIES
   graphlient
   kramdown
+  rerun
   sinatra
   sinatra-contrib!
   sinatra-flash
+  slim
 
 BUNDLED WITH
    1.17.2
