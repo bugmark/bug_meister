@@ -1,4 +1,15 @@
 ---
+exchange_url: http://localhost:3000
+admin_username: admin@bugmark.net
+admin_password: bugmark
+leader_name: Andy Leak 
+leader_email: andy@r210.com
+participants:
+  - andy@r210.com
+  - test1@bugmark.net
+  - test2@bugmark.net
+  - test3@bugmark.net
+  - test4@bugmark.net
 tracker_type: github
 repo_list:
   - Bugmark-Simulator/bugmark_simulation

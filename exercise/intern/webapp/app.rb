@@ -1,5 +1,5 @@
-require_relative './lib/web_util'
-require_relative './lib/balance'
+# require_relative './lib/web_util'
+# require_relative './lib/balance'
 require_relative './app_helpers'
 
 require 'sinatra'
@@ -15,28 +15,28 @@ enable :sessions
 helpers AppHelpers
 
 # ----- filters -----
-before do
-  @start_clock = Time.now
-end
+# before do
+#   @start_clock = Time.now
+# end
 
-after do
-  if USE_INFLUX == true
-    path = request.env['REQUEST_PATH']
-    meth = request.env['REQUEST_METHOD']
-    user = current_user&.email || 'NA'
-    time = Time.now - @start_clock
-    args = {
-      tags: {
-        user: user,
-        method: meth,
-        path: path
-      },
-      values: {req_time: time},
-      timestamp: BugmTime.now.to_i
-    }
-    InfluxViews.write_point 'Request', args
-  end
-end
+# after do
+#   if USE_INFLUX == true
+#     path = request.env['REQUEST_PATH']
+#     meth = request.env['REQUEST_METHOD']
+#     user = current_user&.email || 'NA'
+#     time = Time.now - @start_clock
+#     args = {
+#       tags: {
+#         user: user,
+#         method: meth,
+#         path: path
+#       },
+#       values: {req_time: time},
+#       timestamp: BugmTime.now.to_i
+#     }
+#     InfluxViews.write_point 'Request', args
+#   end
+# end
 
 # ----- core app -----
 
@@ -282,7 +282,7 @@ post '/login' do
     flash[:success]    = 'Logged in successfully'
     AccessLog.new(current_user&.email).logged_in
     path = session[:tgt_path]
-    session[:tgt_path] = nil 
+    session[:tgt_path] = nil
     redirect path || '/'
   when !user
     word = (/@/ =~ params['usermail']) ? 'Email Address' : 'Username'

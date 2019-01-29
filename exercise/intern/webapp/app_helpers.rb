@@ -2,10 +2,9 @@ require 'time'
 
 module AppHelpers
 
-  include ActionView::Helpers::DateHelper
+  # include ActionView::Helpers::DateHelper
 
   # ----- scale -----
-
 
   # ----- positions -----
 
@@ -416,7 +415,8 @@ module AppHelpers
   # ----- auth / consent -----
 
   def current_user
-    @current_user ||= User.find_by_email(session[:usermail])
+    # @current_user ||= User.find_by_email(session[:usermail])
+    'TBD'
   end
 
   def consented?

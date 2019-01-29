@@ -1,12 +1,14 @@
 source "https://rubygems.org"
 
-gem 'graphlient'
-gem 'sinatra'
-gem 'sinatra-flash'
-github 'sinatra/sinatra' do
-  gem 'sinatra-contrib'
+gem 'graphlient'    # graphql client
+gem 'kramdown'      # markdown templates
+gem 'slim'          # slim templates
+gem 'dotenv'        # config via environment variables
+gem 'sinatra'       # app server
+gem 'sinatra-flash' # error and success messages
+gem 'rerun'         # auto-reload app on code changes
+
+github 'sinatra/sinatra' do 
+  gem 'sinatra-contrib' # sinatra extensions
 end
-gem 'kramdown'
-gem 'slim'
-gem 'rerun'
 

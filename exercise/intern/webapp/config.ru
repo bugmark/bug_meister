@@ -1,8 +1,6 @@
-# require_relative '../../Base/lib/base'
-#
-require_relative '../../Base/lib/exchange'
-
-Exchange.load_rails
+require_relative "../../Lib/dotenv"
+require_relative "../../Lib/trial_settings"
+require_relative "../../Lib/graphql_client"
 
 require_relative "./app"
 

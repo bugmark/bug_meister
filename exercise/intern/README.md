@@ -2,7 +2,7 @@
 
 ## Overview
 
-This exercise is intended to be the first that trades on Bugmark issues!
+This exercise is intended to trade on Bugmark issues, for use with interns.
 
 It copies and extends the Trader exercise.
 

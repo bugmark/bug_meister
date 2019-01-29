@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-gemfile() {
-  gem1=~/src/bugmark/exchange/Gemfile
-  gem2=~/src/exchange/Gemfile
-  [ -f $gem1 ] && echo "$gem1" || echo "$gem2"
-}
+export BUNDLE_GEMFILE=~/src/bugmark/test_bench/exercise/Gemfile
 
-echo "GEMFILE IS $(gemfile)"
+echo "-----"
+echo "STARTING WEBAPP"
+echo "GEMFILE IS $BUNDLE_GEMFILE"
 
-export BUNDLE_GEMFILE=$(gemfile)
+[ -d ./webapp ] && cd webapp
 
-bundle exec rackup -p 4567 -o 0.0.0.0
+rerun 'bundle exec rackup -p 4567 -o 0.0.0.0'

@@ -20,6 +20,6 @@ TRIAL_DIR=~/trial/<exercise_name>
   - create on github (how ?)
   - clone locally (how ?)
   - make sure .env file is good (see above)
-  - run `trialinit` (in what folder?
+  - run `trialinit` (in what folder?)
   - edit `<TRIAL_DIR>/Settings.yml` (where is a template for the file?)
   
