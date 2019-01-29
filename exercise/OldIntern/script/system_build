@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+# ----- issues -----
+
+system "./issue_sync"
+
+puts 'DONE'
