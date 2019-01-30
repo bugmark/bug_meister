@@ -15,6 +15,10 @@ class GraphqlClient
     client.schema
   end
 
+  def schema_reset
+    client.schema.dump!
+  end
+
   def query(query_string)
     client.query("query #{query_string}")
   end
@@ -29,7 +33,10 @@ class GraphqlClient
     user = "#{usermail}:#{password}"
     cyph = Base64.encode64(user).chomp
     url  = "#{settings.exchange_url}/graphql"
-    opts = { headers: {"Authorization": "Basic #{cyph}"} }
+    opts = {
+      headers: {"Authorization": "Basic #{cyph}"},
+      schema_path: "/tmp/bmx_testbench_schema.json"
+    }
     @cclient ||= Graphlient::Client.new(url, opts)
   end
 end

@@ -13,6 +13,8 @@ enable :sessions
 
 helpers AppHelpers
 
+Client.new(TS).schema_reset  # reset the cached GraphQL schema
+
 # ----- base info -----
 
 before do
