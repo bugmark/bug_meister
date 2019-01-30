@@ -10,12 +10,7 @@ h2 The Intern Exercise
         td Use the issue market to prioritize development activities.
       tr
         td <b>Leader</b>
-        td TBD
-      tr
-        td <b>Links</b>
-        td
-          a[href="http://intern.bugmark.net:3030"] Visualizations
-          |  (user/pass = admin/admin)
+        td #{TS.leader_name} (#{TS.leader_email})
   .col-md-5
     p Get started:
     ol
@@ -32,7 +27,7 @@ h2 The Intern Exercise
         == base_link("Help Pages", "/help")
       li
         ' Contact
-        | TBD
+        | #{TS.leader_name}
       li
         ' Use
         == base_link("Bugmark Slack", "https://bugmark.slack.com", :new_tab)

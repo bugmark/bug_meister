@@ -5,6 +5,7 @@ require 'sinatra/flash'
 require 'sinatra/content_for'
 
 require 'securerandom'
+require 'time'
 
 set :bind, '0.0.0.0'
 set :root, File.dirname(__FILE__)
@@ -12,29 +13,13 @@ enable :sessions
 
 helpers AppHelpers
 
-# ----- filters -----
-# before do
-#   @start_clock = Time.now
-# end
+# ----- base info -----
 
-# after do
-#   if USE_INFLUX == true
-#     path = request.env['REQUEST_PATH']
-#     meth = request.env['REQUEST_METHOD']
-#     user = current_user&.email || 'NA'
-#     time = Time.now - @start_clock
-#     args = {
-#       tags: {
-#         user: user,
-#         method: meth,
-#         path: path
-#       },
-#       values: {req_time: time},
-#       timestamp: BugmTime.now.to_i
-#     }
-#     InfluxViews.write_point 'Request', args
-#   end
-# end
+before do
+  @host_info = Client.new(TS).query("{host { info { dayOffset hostName hostTime hourOffset }}}").to_h["data"]["host"]["info"]
+  @host_time = @host_info["hostTime"]
+  @time      = Time.parse(@host_time)
+end
 
 # ----- core app -----
 

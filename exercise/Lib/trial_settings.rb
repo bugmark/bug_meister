@@ -6,17 +6,22 @@ class TrialSettings
       settings[m.to_sym]
     end
 
-    def settings
+    def data
       default_opts = {
-        trial_dir: File.expand_path(TRIAL_DIR),
+        trial_dir: File.expand_path(trial_dir),
       }
       @settings ||= default_opts.merge(settings_hash)
     end
+    alias_method :settings, :data
 
     private
 
+    def trial_dir
+      ExerciseEnv.trial_dir
+    end
+
     def settings_hash
-      Dir.glob("#{TRIAL_DIR}/Settings.yml").reduce({}) do |acc, fn|
+      Dir.glob("#{trial_dir}/Settings.yml").reduce({}) do |acc, fn|
         acc.merge(yaml_settings(fn))
       end
     end

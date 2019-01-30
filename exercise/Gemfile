@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem 'pry'           # debugger
 gem 'graphlient'    # graphql client
 gem 'kramdown'      # markdown templates
 gem 'slim'          # slim templates

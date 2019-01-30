@@ -1,5 +1,5 @@
 ---
-exchange_url: http://localhost:3000
+exchange_url: http://hana:3000
 admin_username: admin@bugmark.net
 admin_password: bugmark
 leader_name: Andy Leak 

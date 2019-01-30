@@ -28,7 +28,7 @@ class GraphqlClient
   def client
     user = "#{usermail}:#{password}"
     cyph = Base64.encode64(user).chomp
-    url  = "#{settings["exchange_url"]}/graphql"
+    url  = "#{settings.exchange_url}/graphql"
     opts = { headers: {"Authorization": "Basic #{cyph}"} }
     @cclient ||= Graphlient::Client.new(url, opts)
   end
