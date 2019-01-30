@@ -3,10 +3,12 @@ require 'base64'
 
 class GraphqlClient
 
-  attr_reader :config
+  attr_reader :settings, :usermail, :password
 
-  def initialize(config)
-    @config = config
+  def initialize(settings, usermail = "admin@bugmark.net", password = "bugmark")
+    @settings = settings
+    @usermail = usermail
+    @password = password
   end
 
   def schema
@@ -23,11 +25,13 @@ class GraphqlClient
 
   private
 
-  def client(mail, password)
-    user = "#{config["usermail"]}:#{config["password"]}"
+  def client
+    user = "#{usermail}:#{password}"
     cyph = Base64.encode64(user).chomp
-    url  = "#{config["scheme"]}://#{config["host"]}/graphql"
+    url  = "#{settings["exchange_url"]}/graphql"
     opts = { headers: {"Authorization": "Basic #{cyph}"} }
     @cclient ||= Graphlient::Client.new(url, opts)
   end
 end
+
+Client = GraphqlClient

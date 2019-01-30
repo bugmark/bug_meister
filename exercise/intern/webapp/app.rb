@@ -1,5 +1,3 @@
-# require_relative './lib/web_util'
-# require_relative './lib/balance'
 require_relative './app_helpers'
 
 require 'sinatra'
