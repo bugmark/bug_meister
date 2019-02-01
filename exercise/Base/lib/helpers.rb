@@ -1,5 +1,5 @@
 def all_repos
-  [TS.repo_base] + TS.repo_list
+  [TS.repo_base] + (TS.repo_list || [])
 end
 
 def iora_tracker_name_for(type, repo)

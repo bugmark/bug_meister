@@ -4,7 +4,14 @@ module AppHelpers
 
   # include ActionView::Helpers::DateHelper
 
-  # ----- scale -----
+  # ----- base -----
+
+  def base_query
+    mail = session[:usermail]
+    host = %Q[host { info { dayOffset hostName hostTime hourOffset }}]
+    user = mail ? %Q[user(email: "#{mail}") { id uuid balance email }] : ""
+    "{ #{host} #{user} }"
+  end
 
   # ----- positions -----
 
@@ -415,8 +422,8 @@ module AppHelpers
   # ----- auth / consent -----
 
   def current_user
-    # @current_user ||= User.find_by_email(session[:usermail])
-    'TBD'
+    return nil unless @base_info.data.respond_to?(:user)
+    @current_user ||= @base_info.data.user
   end
 
   def consented?

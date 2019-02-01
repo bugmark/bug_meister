@@ -18,13 +18,10 @@ Client.new(TS).schema_reset  # reset the cached GraphQL schema
 # ----- base info -----
 
 before do
-  @host_info = Client.new(TS).query("{host { info { dayOffset hostName hostTime hourOffset }}}")
-  @host_data = @host_info.to_h["data"]["host"]["info"]
+  @base_info = Client.new(TS).query(base_query)
+  @host_data = @base_info.to_h["data"]["host"]["info"]
   @host_time = @host_data["hostTime"]
   @time      = Time.parse(@host_time)
-  require 'pry'
-  binding.pry
-  @x = 1
 end
 
 # ----- core app -----

@@ -4,7 +4,12 @@ Dir.chdir File.expand_path(__dir__)
 
 require_relative '../../Base/lib/dotenv'
 
-(dotenv_trial_data(__dir__)&.split(",") || []).each do |dataset|
+datasets = dotenv_trial_data(__dir__)&.split(",") || []
+
+puts "DATASETS: #{datasets.inspect}"
+
+datasets.each do |dataset|
   cleaner = "#{dataset}_clean"
+  puts "Operating on #{cleaner}"
   system "../../../data/#{cleaner} #{dotenv_trial_dir(__dir__)}"
 end
