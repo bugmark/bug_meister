@@ -4,13 +4,26 @@ module AppHelpers
 
   # include ActionView::Helpers::DateHelper
 
-  # ----- base -----
+  # ----- GraphQL Queries -----
+
+  def host_expression
+    %Q[host { info { dayOffset hostName hostTime hourOffset }}]
+  end
+
+  def user_expression(email = session[:usermail])
+    email ? %Q[user(email: "#{email}") { id uuid balance email }] : ""
+  end
+
+  def base_expression
+    "{ #{host_expression} #{user_expression} }"
+  end
 
   def base_query
-    mail = session[:usermail]
-    host = %Q[host { info { dayOffset hostName hostTime hourOffset }}]
-    user = mail ? %Q[user(email: "#{mail}") { id uuid balance email }] : ""
-    "{ #{host} #{user} }"
+    Client.new(TS).query(base_expression)
+  end
+
+  def user_query(email)
+    Client.new(TS).query(user_expression(email))
   end
 
   # ----- positions -----
