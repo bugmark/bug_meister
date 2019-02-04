@@ -28,8 +28,7 @@ end
 # ----- core app -----
 
 get '/' do
-  # slim :home
-  'Hello World'
+  slim :home
 end
 
 # ----- events -----
