@@ -13,21 +13,23 @@ enable :sessions
 
 helpers AppHelpers
 
-Client.new(TS).schema_reset  # reset the cached GraphQL schema
+# reset the cached GraphQL schema
+Client.new(TS).reset_schema_cache
 
 # ----- base info -----
 
 before do
-  @base_info = Client.new(TS).query(base_query)
-  @host_data = @base_info.to_h["data"]["host"]["info"]
-  @host_time = @host_data["hostTime"]
+  @base_info = Client.new(TS).query(base_expression)
+  @host_data = @base_info.to_h['data']['host']['info']
+  @host_time = @host_data['hostTime']
   @time      = Time.parse(@host_time)
 end
 
 # ----- core app -----
 
 get '/' do
-  slim :home
+  # slim :home
+  'Hello World'
 end
 
 # ----- events -----

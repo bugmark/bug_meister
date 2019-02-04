@@ -1,5 +1,7 @@
 *.gem
 *.rbc
+.session.vim
+*.vim
 /.idea
 /.idea/
 /.config

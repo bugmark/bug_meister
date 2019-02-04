@@ -1,5 +1,6 @@
 require 'time'
 
+# Helper methods for controller and views
 module AppHelpers
 
   # include ActionView::Helpers::DateHelper
@@ -30,6 +31,7 @@ module AppHelpers
 
   def position_count(user)
     return 0 unless user
+
     sellable_positions(user).count + buyable_positions.count
   end
 
@@ -43,11 +45,11 @@ module AppHelpers
 
   # ----- date formatting -----
   def dvis(time = BugmTime.now)
-    time.strftime("%b %d")
+    time.strftime('%b %d')
   end
 
   def dstr(time = BugmTime.now)
-    time.strftime("%Y-%m-%d")
+    time.strftime('%Y-%m-%d')
   end
 
   # ----- investment -----
