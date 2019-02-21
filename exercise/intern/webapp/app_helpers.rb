@@ -1,31 +1,70 @@
 require 'time'
+require_relative 'lib/current_user'
 
 # Helper methods for controller and views
 module AppHelpers
 
   # include ActionView::Helpers::DateHelper
+  #
+  # ----- auth / consent -----
 
-  # ----- GraphQL Queries -----
+  def current_user
+    puts 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+    return nil unless session[:token]
 
-  def host_expression
-    'host { info { dayOffset hostName hostTime hourOffset }}'
+    puts '---------------------------------------'
+    puts @base_info.inspect
+    puts session.inspect
+    puts session[:usermail]
+    puts session[:token]
+    puts session[:consent]
+
+    @current_user ||= CurrentUser.new(session[:usermail])
   end
 
-  def user_expression(email = session[:usermail])
-    email ? %[user(email: "#{email}") { id uuid balance email }] : ''
+  def consented?
+    session[:consent]
   end
 
-  def base_expression
-    "{ #{host_expression} #{user_expression} }"
+  def user_mail
+    current_user&.email
   end
 
-  def base_query
-    Client.new(TS).query(base_expression)
+  def user_name(user = current_user)
+    if user
+      user.name || user.uuid[0..5]
+    else
+      'TBD'
+    end
   end
 
-  def user_query(email)
-    Client.new(TS).query(user_expression(email))
+  def logged_in?
+    current_user
   end
+
+  def valid_consent(email)
+    AccessLog.new(email).has_consented?
+  end
+
+  def protected!
+    authenticated!
+    consented!
+  end
+
+  def authenticated!
+    return if logged_in?
+
+    flash[:danger]     = 'Please log in'
+    session[:tgt_path] = request.path_info
+    redirect '/login'
+  end
+
+  def consented!
+    return if consented?
+
+    redirect '/consent_form'
+  end
+
 
   # ----- positions -----
 
@@ -444,57 +483,6 @@ module AppHelpers
     else
       "<a href='#{path}'>#{label}</a>"
     end
-  end
-
-  # ----- auth / consent -----
-
-  def current_user
-    return nil unless @base_info.data.respond_to?(:user)
-
-    @current_user ||= @base_info.data.user
-  end
-
-  def consented?
-    session[:consent]
-  end
-
-  def user_mail
-    current_user&.email
-  end
-
-  def user_name(user = current_user)
-    if user
-      user.name || user.uuid[0..5]
-    else
-      'TBD'
-    end
-  end
-
-  def logged_in?
-    current_user
-  end
-
-  def valid_consent(user)
-    AccessLog.new(user&.email).has_consented?
-  end
-
-  def protected!
-    authenticated!
-    consented!
-  end
-
-  def authenticated!
-    return if logged_in?
-
-    flash[:danger]     = 'Please log in'
-    session[:tgt_path] = request.path_info
-    redirect '/login'
-  end
-
-  def consented!
-    return if consented?
-
-    redirect '/consent_form'
   end
 
   # ----- offer helpers -----

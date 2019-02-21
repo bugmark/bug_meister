@@ -19,7 +19,8 @@ Client.new(TS).reset_schema_cache
 # ----- base info -----
 
 before do
-  @base_info = Client.new(TS).query(base_expression)
+  lcl_mail   = session[:usermail]
+  @base_info = Client.new(TS).query(GX.base_expression(lcl_mail))
   @host_data = @base_info.to_h['data']['host']['info']
   @host_time = @host_data['hostTime']
   @time      = Time.parse(@host_time)
@@ -259,23 +260,26 @@ end
 
 post '/login' do
   mail, pass = [params['usermail'], params['password']]
-  user = User.find_by_email(mail) || User.find_by_name(mail)
-  valid_auth    = user&.valid_password?(pass)
-  valid_consent = valid_consent(user)
+  base = Client.new(TS).query(GX.auth_expression(mail, pass).paren_wrap)
+  auth = base.to_h['data']['user_auth']
+  valid_email   = auth['email']
+  valid_token   = auth['basicToken']
+  valid_consent = true # valid_consent(mail)
   case
-  when valid_auth && valid_consent
-    session[:usermail] = user.email
+  when valid_token
+    session[:usermail] = mail
+    session[:token]    = valid_token
     session[:consent]  = true
     flash[:success]    = 'Logged in successfully'
-    AccessLog.new(current_user&.email).logged_in
+    # AccessLog.new(mail).logged_in
     path = session[:tgt_path]
     session[:tgt_path] = nil
     redirect path || '/'
-  when !user
+  when !valid_email
     word = (/@/ =~ params['usermail']) ? 'Email Address' : 'Username'
     flash[:danger] = "Unrecognized #{word} (#{params['usermail']}) please try again or contact #{TS.leader_name}"
     redirect '/login'
-  when !valid_auth
+  when !valid_token
     flash[:danger] = "Invalid password - please try again or contact #{TS.leader_name}"
     redirect '/login'
   when !valid_consent
