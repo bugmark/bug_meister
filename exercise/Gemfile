@@ -1,17 +1,17 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem 'pry'           # debugger
+gem 'coffee-script' # coffeescript
+gem 'dotenv'        # config via environment variables
 gem 'graphlient'    # graphql client
 gem 'kramdown'      # markdown templates
-gem 'slim'          # slim templates
-gem 'dotenv'        # config via environment variables
+gem 'pry'           # debugger
+gem 'rerun'         # auto-reload app on code changes
+gem 'rest-client'   # needed by solargraph
 gem 'sinatra'       # app server
 gem 'sinatra-flash' # error and success messages
-gem 'rerun'         # auto-reload app on code changes
+gem 'slim'          # slim templates
 gem 'solargraph'    # ruby language server for development
-gem 'rest-client'   # needed by solargraph
 
-github 'sinatra/sinatra' do 
+github 'sinatra/sinatra' do
   gem 'sinatra-contrib' # sinatra extensions
 end
-

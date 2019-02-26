@@ -20,7 +20,7 @@ Client.new(TS).reset_schema_cache
 
 before do
   lcl_mail   = session[:usermail]
-  @base_info = Client.new(TS).query(GX.base_expression(lcl_mail))
+  @base_info = GQ.base(lcl_mail)
   @host_data = @base_info.to_h['data']['host']['info']
   @host_time = @host_data['hostTime']
   @time      = Time.parse(@host_time)
@@ -73,7 +73,8 @@ end
 # list all issues
 get '/issues' do
   protected!
-  @issues = Issue.open
+  # @issues = Issue.open
+  @issues = []
   slim :issues
 end
 
@@ -214,7 +215,7 @@ end
 get '/contracts' do
   protected!
   @title     = 'My Contracts'
-  @contracts = current_user.contracts
+  @contracts = [] #current_user.contracts
   slim :contracts
 end
 
@@ -260,7 +261,7 @@ end
 
 post '/login' do
   mail, pass = [params['usermail'], params['password']]
-  base = Client.new(TS).query(GX.auth_expression(mail, pass).paren_wrap)
+  base = GQ.user_auth(mail, pass)
   auth = base.to_h['data']['user_auth']
   valid_email   = auth['email']
   valid_token   = auth['basicToken']

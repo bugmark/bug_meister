@@ -1,5 +1,4 @@
 require 'time'
-require_relative 'lib/current_user'
 
 # Helper methods for controller and views
 module AppHelpers
@@ -19,7 +18,7 @@ module AppHelpers
     puts session[:token]
     puts session[:consent]
 
-    @current_user ||= CurrentUser.new(session[:usermail])
+    @current_user ||= GqUser.new(session[:usermail])
   end
 
   def consented?
