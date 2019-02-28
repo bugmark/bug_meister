@@ -17,7 +17,6 @@ table.table#xtable
   tbody
     - @contracts.each do |contract|
       tr
-        /td == contract_id_link(contract)
         td == issue_id_link(contract.issue)
         td = contract.positions.unfixed.count
         td = contract.total_value
