@@ -20,9 +20,9 @@ Client.new(TS).reset_schema_cache
 
 before do
   lcl_mail   = session[:usermail]
-  @base_info = GQ.base(lcl_mail)
-  @host_data = @base_info.to_h['data']['host']['info']
-  @host_time = @host_data['hostTime']
+  @base_data = GQ.base(lcl_mail)
+  @host_data = @base_data.host.info
+  @host_time = @host_data.host_time
   @time      = Time.parse(@host_time)
 end
 
@@ -35,7 +35,7 @@ end
 # ----- events -----
 
 get '/events' do
-  @events = Event.all
+  @events = GQ.events
   slim :events
 end
 
@@ -262,9 +262,9 @@ end
 post '/login' do
   mail, pass = [params['usermail'], params['password']]
   base = GQ.user_auth(mail, pass)
-  auth = base.to_h['data']['user_auth']
-  valid_email   = auth['email']
-  valid_token   = auth['basicToken']
+  auth = base.data.user_auth
+  valid_email   = auth.email
+  valid_token   = auth.basic_token
   valid_consent = true # valid_consent(mail)
   case
   when valid_token

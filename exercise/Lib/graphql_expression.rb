@@ -11,6 +11,10 @@ class GraphqlExpression
       'host { info { dayOffset hostName hostTime hourOffset }}'
     end
 
+    def events
+      'events(limit: 20) { id eventUuid cmdType eventType note users {email}}'
+    end
+
     def user(email)
       email ? %[user(email: "#{email}") { id uuid balance email name }] : ''
     end

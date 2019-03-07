@@ -12,7 +12,7 @@ module AppHelpers
     return nil unless session[:token]
 
     puts '---------------------------------------'
-    puts @base_info.inspect
+    puts @base_data.inspect
     puts session.inspect
     puts session[:usermail]
     puts session[:token]

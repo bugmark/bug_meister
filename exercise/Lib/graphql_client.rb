@@ -24,6 +24,9 @@ class GraphqlClient
 
   # Post a query expression
   def query(query_string)
+    puts '@' * 60
+    puts query_string
+    puts '@' * 60
     client.query("query #{query_string}")
   end
 
