@@ -20,22 +20,22 @@ table.table#xtable
   tbody
     - @issues.each do |issue|
       tr
-        td == issue_id_link(issue)
-        td == issue.tracker.name.split("/").last.gsub("_", "").capitalize
-        td = issue.stm_title
+        td TBD
+        td TBD
+        td TBD
         td
-          = issue.offers.open.count
+          TBD
           '  /
-          = issue.offers.open.pluck(:value).sum
+          TBD
           '  tokens
-          == "<b>*</b>" if issue.offers.open.pluck(:user_uuid).include?(current_user.uuid)
+          == "<b>*</b>"
         td
-          = (issue.offers.crossed.count.to_f / 2 ).to_i
+          TBD
           '  /
-          = issue.offers.crossed.pluck(:value).sum
+          TBD
           '  tokens
-          == "<b>*</b>" if issue.offers_bf.pluck(:user_uuid).include?(current_user.uuid)
-        td == tracker_btn(issue)
+          == "<b>*</b>"
+        td TBD
 .row
   .col-md-12.text-center
     small <b>*</b> issues where you have an offer or contract
@@ -45,10 +45,10 @@ table.table#xtable
 
 - content_for :page_js do
   coffee:
-    table = $('#xtable').DataTable(stateSave: true);
-    table = $('#xtable').DataTable({
-      "lengthMenu": [[-1, 50 100 200], ["All", 50, 100, 200]]
-    });
+    # table = $('#xtable').DataTable(stateSave: true);
+    # table = $('#xtable').DataTable({
+    #   "lengthMenu": [[-1, 50 100 200], ["All", 50, 100, 200]]
+    # });
     # setMyIssues  = -> table.search("*").draw()
     # setAllIssues = -> table.search("").draw()
     # $('document').ready ->

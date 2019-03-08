@@ -70,11 +70,10 @@ get '/issues_ex/:exid' do
   redirect "/issues/#{issue.uuid}"
 end
 
-# list all issues
+# list all open issues
 get '/issues' do
   protected!
-  # @issues = Issue.open
-  @issues = []
+  @issues = GQ.issues(stm_status: 'open')
   slim :issues
 end
 

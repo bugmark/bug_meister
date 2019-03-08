@@ -5,9 +5,12 @@
 - [x] update to latest bootstrap
 - [x] get one table to render using datatables
 
-- [ ] render all events
+## 2019-03-07 THU
+
+- [x] render all events
 
 - [ ] render all issues
+
 - [ ] render all offers
 - [ ] render all contracts
 

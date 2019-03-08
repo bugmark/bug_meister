@@ -19,6 +19,11 @@ class GraphqlQuery
       Client.new(TS).query(GX.events.paren_wrap).data.events
     end
 
+    def issues(**args)
+      puts args.inspect
+      Client.new(TS).query(GX.issues(args).paren_wrap).data.issues
+    end
+
   end
 end
 

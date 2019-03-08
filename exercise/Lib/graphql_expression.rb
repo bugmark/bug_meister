@@ -15,6 +15,12 @@ class GraphqlExpression
       'events(limit: 20) { id eventUuid cmdType eventType note users {email}}'
     end
 
+    def issues(limit: 100, stm_status: nil)
+      stat = stm_status ? "stm_status: #{stm_status}" : nil
+      opts = ["limit: #{limit}", stat].compact.join(', ')
+      "issues(#{opts}) { id }"
+    end
+
     def user(email)
       email ? %[user(email: "#{email}") { id uuid balance email name }] : ''
     end
